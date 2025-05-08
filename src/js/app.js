@@ -39,7 +39,7 @@ class App {
         // Prevent leaving page
         window.addEventListener('beforeunload', (e) => {
             e.preventDefault();
-            e.returnValue = 'Are you sure you want to leave?';
+            return 'Are you sure you want to leave?';
         });
     }
 }
