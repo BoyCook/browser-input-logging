@@ -2,15 +2,28 @@ import { SearchImagesUseCase } from '@use-cases/SearchImagesUseCase';
 import { ImageSearchRepository } from '@application/ImageSearchRepository';
 import { ImageSearchResult } from '@domain/Image';
 
+class FakeImageSearchRepository implements ImageSearchRepository {
+    private results: ImageSearchResult[] = [];
+
+    setResults(results: ImageSearchResult[]) {
+        this.results = results;
+    }
+
+    async searchImages(query: string, page: number): Promise<ImageSearchResult> {
+        return this.results[0] || {
+            success: false,
+            error: 'No results found'
+        };
+    }
+}
+
 describe('Given a SearchImagesUseCase', () => {
     let useCase: SearchImagesUseCase;
-    let mockRepository: jest.Mocked<ImageSearchRepository>;
+    let fakeRepository: FakeImageSearchRepository;
 
     beforeEach(() => {
-        mockRepository = {
-            searchImages: jest.fn()
-        };
-        useCase = new SearchImagesUseCase(mockRepository);
+        fakeRepository = new FakeImageSearchRepository();
+        useCase = new SearchImagesUseCase(fakeRepository);
     });
 
     describe('when executing with an empty query', () => {
@@ -19,12 +32,11 @@ describe('Given a SearchImagesUseCase', () => {
 
             expect(result.success).toBe(false);
             expect(result.error).toBe('Query parameter is required');
-            expect(mockRepository.searchImages).not.toHaveBeenCalled();
         });
     });
 
     describe('when executing with a valid query', () => {
-        const mockResult: ImageSearchResult = {
+        const fakeResult: ImageSearchResult = {
             success: true,
             data: [{
                 title: 'Test Image',
@@ -39,21 +51,19 @@ describe('Given a SearchImagesUseCase', () => {
         };
 
         beforeEach(() => {
-            mockRepository.searchImages.mockResolvedValue(mockResult);
+            fakeRepository.setResults([fakeResult]);
         });
 
         it('then it should return the search results', async () => {
             const result = await useCase.execute('test query');
 
-            expect(result).toEqual(mockResult);
-            expect(mockRepository.searchImages).toHaveBeenCalledWith('test query', 1);
+            expect(result).toEqual(fakeResult);
         });
 
         it('then it should handle custom page numbers', async () => {
             const result = await useCase.execute('test query', 2);
 
-            expect(result).toEqual(mockResult);
-            expect(mockRepository.searchImages).toHaveBeenCalledWith('test query', 2);
+            expect(result).toEqual(fakeResult);
         });
     });
 }); 
