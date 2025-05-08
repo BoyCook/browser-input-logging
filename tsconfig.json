@@ -17,8 +17,8 @@
             "@domain/*": ["src/domain/*"],
             "@repositories/*": ["src/repositories/*"],
             "@application/*": ["src/application/*"],
-        "@controllers/*": ["src/controllers/*"],
-        "@use-cases/*": ["src/use-cases/*"]
+            "@controllers/*": ["src/controllers/*"],
+            "@use-cases/*": ["src/application/use-cases/*"]
         },
         "types": ["jest", "node"]
     },

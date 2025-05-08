@@ -1,10 +1,10 @@
-import { SearchImagesUseCase } from '../../../src/application/use-cases/SearchImagesUseCase';
-import { IImageSearchRepository } from '../../../src/domain/repositories/IImageSearchRepository';
-import { ImageSearchResult } from '../../../src/domain/entities/Image';
+import { SearchImagesUseCase } from '@use-cases/SearchImagesUseCase';
+import { ImageSearchRepository } from '@application/ImageSearchRepository';
+import { ImageSearchResult } from '@domain/Image';
 
 describe('Given a SearchImagesUseCase', () => {
     let useCase: SearchImagesUseCase;
-    let mockRepository: jest.Mocked<IImageSearchRepository>;
+    let mockRepository: jest.Mocked<ImageSearchRepository>;
 
     beforeEach(() => {
         mockRepository = {

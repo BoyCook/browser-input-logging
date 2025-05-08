@@ -1,4 +1,4 @@
-import ImageSearch from '../src/js/server/ImageSearch';
+import ImageSearch from '../src/web/js/server/ImageSearch';
 
 describe('Given an ImageSearch instance', () => {
     let imageSearch: ImageSearch;

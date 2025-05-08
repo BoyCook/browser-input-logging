@@ -1,4 +1,4 @@
-import { Image } from '../../../src/domain/entities/Image';
+import { Image } from '@domain/Image';
 
 describe('Given an Image entity', () => {
     describe('when creating a valid image', () => {

@@ -3,11 +3,39 @@ description:
 globs: 
 alwaysApply: true
 ---
+# Project Structure and Architecture Rules
 
-# Your rule content
+## Directory Structure
+- `src/domain/` - Core business logic and entities
+- `src/application/` - Use cases and business rules
+- `src/repositories/` - Data access and external service implementations
+- `src/controllers/` - Request handlers and API endpoints
+- `src/web/` - Web-specific code (static files, templates)
 
-- Always use Clean Code
-- Always follow Clean Architecture
-- Use DDD where appropriate 
-- Always use top level dir __tests__ for tests
-- Always use BDD style tests, also in the test name
+## Code Organization
+- Always use Clean Architecture principles
+- Domain layer should be independent of other layers
+- Application layer should depend only on domain layer
+- Infrastructure (repositories) should implement domain interfaces
+- Controllers should only handle HTTP concerns
+
+## Testing
+- Use top level `__tests__` directory
+- Mirror the src directory structure in tests
+- Always use BDD style tests (Given/When/Then)
+- Test each layer independently
+- Use fakes not mocks
+
+## Path Aliases
+- Use `@domain/*` for domain imports
+- Use `@application/*` for application imports
+- Use `@repositories/*` for repository imports
+- Use `@controllers/*` for controller imports
+- Use `@use-cases/*` for use case imports
+
+## Code Style
+- Use TypeScript for type safety
+- Follow SOLID principles
+- Keep functions and classes small and focused
+- Use dependency injection
+- Document public APIs
