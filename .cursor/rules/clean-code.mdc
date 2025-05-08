@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+
+- Always use Clean Code
+- Always follow Clean Architecture
+- Use DDD where appropriate 
