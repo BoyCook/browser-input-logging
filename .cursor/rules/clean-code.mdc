@@ -9,3 +9,5 @@ alwaysApply: true
 - Always use Clean Code
 - Always follow Clean Architecture
 - Use DDD where appropriate 
+- Always use top level dir __tests__ for tests
+- Always use BDD style tests, also in the test name
